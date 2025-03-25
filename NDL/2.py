@@ -1,3 +1,4 @@
+<<<<<<< HEAD:2.py
 import numpy as np
 
 
@@ -33,3 +34,7 @@ if __name__ == "__main__":
 
     for inputs in X:
         print(f"{inputs} -> {neuron.predict(inputs)}")
+=======
+import numpy as np
+
+>>>>>>> 4c3baa3cafff9d46df87d6d8724b63212d4dcd21:NDL/2.py
