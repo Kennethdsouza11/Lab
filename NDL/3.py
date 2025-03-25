@@ -25,4 +25,3 @@ plt.subplot(122)
 plt.scatter(X[:,0], X[:,1], c = y)
 plt.title(f"Covariance\nWeights : {cov_weights.numpy().round(2)}")
 plt.show()
-        
