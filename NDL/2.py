@@ -1,4 +1,3 @@
-<<<<<<< HEAD:2.py
 import numpy as np
 
 
@@ -34,7 +33,37 @@ if __name__ == "__main__":
 
     for inputs in X:
         print(f"{inputs} -> {neuron.predict(inputs)}")
-=======
-import numpy as np
 
->>>>>>> 4c3baa3cafff9d46df87d6d8724b63212d4dcd21:NDL/2.py
+
+from collections import Counter
+
+class MemoryBasedNeuron():
+    def __init__(self, k = 1):
+        self.k = k
+        self.memory = []
+        
+    def train(self, training_inputs, labels):
+        self.memory = list(zip(training_inputs, labels))
+        
+    def predict(self, inputs):
+        if not self.memory:
+            raise ValueError("Neuron has not been trained yet")
+        
+        distances = []
+        for memory_input, memory_label in self.memory:
+            distance = np.linalg.norm(np.array(inputs) - np.array(memory_input))
+            distances.append((distance, memory_label))
+        distances.sort()
+        k_nearest = [label for (dist,label) in distances[:self.k]]
+        most_common = Counter(k_nearest).most_common(1)
+        return most_common[0][0]
+    
+if __name__ == "__main__":
+    X = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
+    y = np.array([0, 1, 1, 1])
+
+    neuron = MemoryBasedNeuron(k=1)
+    neuron.train(X, y)
+
+    for inputs in X:
+        print(f"{inputs} -> {neuron.predict(inputs)}")
