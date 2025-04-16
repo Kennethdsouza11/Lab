@@ -1,18 +1,20 @@
-# 2. How would you use regular expressions to identify all phone numbers in a text document, regardless of their format (e.g., 123-456-7890, (123) 456-7890, etc.)?
+#
 
 import re
 
+def normalize_text(text):
+    # Convert to lowercase
+    text = text.lower()
+    
+    # Remove extra whitespace (including tabs and newlines)
+    text = re.sub(r'\s+', ' ', text).strip()
+    
+    return text
 
-pattern = r'\+?\d{0,2}[-.\s]?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}'
+# Example text
+text = "   This   is   a Sample   TEXT. \nNew line and \tTabs included!  "
 
-text = """
-Here are some phone numbers:
-123-456-7890
-(123) 456-7890
-123.456.7890
-+1-123-456-7890
-+91 9876543210
-"""
+normalized_text = normalize_text(text)
 
-result = re.findall(pattern, text)
-print(result)
+print("Original Text:\n", text)
+print("\nNormalized Text:\n", normalized_text)
