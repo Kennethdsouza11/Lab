@@ -1,22 +1,20 @@
 import numpy as np
-import matplotlib.pyplot as plt
-from minisom import MiniSom
+import tensorflow as tf
 
-np.random.seed(0)
-X = np.random.rand(100,2)
+lstm_cell = tf.keras.layers.LSTMCell(units = 4)
 
-som = MiniSom(x = 10, y = 10, learning_rate = 0.5, sigma = 1.0, input_len =2)
-som.random_weights_init(X)
-som.train_random(X, num_iteration = 500)
+x = tf.constant([[0.5,0.3,0.1]], dtype = tf.float32)
 
-plt.figure(figsize = (10,4))
-plt.pcolor(som.distance_map().T, cmap = 'coolwarm')
-plt.colorbar(label = 'Distance')
-plt.title('SOM')
+initial_state = [tf.zeros((1,4)), tf.zeros((1,4))]
 
-for i, x in enumerate(X):
-    winner = som.winner(x)
-    plt.plot(winner[0]+0.5, winner[1]+0.5, 'o', markerfacecolor = 'None', markeredgecolor = 'black', markersize = 8, markeredgewidth = 1)
-    
-plt.grid(True)
-plt.show()
+output, new_states = lstm_cell(x, initial_state)
+
+print(output.numpy())
+print(new_states[0].numpy())
+print(new_states[1].numpy())
+
+#pip install NDL-MITB
+
+#python -c "import inspect ; import ndl_mitb ; print(inspect.getsource(ndl_mitb))"
+
+#python -c "import inspect ; import ndl_mitb ; print(inspect.getsource(ndl_mitb))"

@@ -1,11 +1,13 @@
-#Error correction
+# Implement the neuron using error correction learning algorithm and memory-based learning algorithm.
+
+# Error correction
 
 from sklearn.linear_model import Perceptron
 import numpy as np
 import matplotlib.pyplot as plt
 
 # OR gate dataset
-X = np.array([[0,0], [0,1], [1,0], [1,1]])
+X = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
 y = np.array([0, 1, 1, 1])
 
 # Train Perceptron
@@ -30,7 +32,7 @@ plt.show()
 from sklearn.neighbors import KNeighborsClassifier
 
 # OR gate dataset
-X = np.array([[0,0], [0,1], [1,0], [1,1]])
+X = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
 y = np.array([0, 1, 1, 1])
 
 # Train k-NN model
